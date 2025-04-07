@@ -1,0 +1,16 @@
+#!/bin/bash --login 
+
+#SBATCH --job-name=parallel_GOL_benchmark
+#SBATCH --output=output_%A_%a.txt  # Output file format: jobID_arrayID
+#SBATCH --error=error_%A_%a.txt    # Error file format: jobID_arrayID
+#SBATCH --array=1-50               # 50 jobs, indexed from 1 to 50
+#SBATCH --time=2:00:00             # Request 2 hours for each job
+#SBATCH --mem=2GB                  # Request 2 GB of memory per job
+#SBATCH --cpus-per-task=1          # 1 CPU per job
+
+# sets random seed for each job based on the SLURM_ARRAY_TASK_ID
+SEED=$SLURM_ARRAY_TASK_ID
+# prints job info
+echo "Running job $SLURM_ARRAY_JOB_ID with seed $SEED"
+# run the reverse Conway's Game of Life program using the cmse2.txt input
+time ./revGOL cmse2.txt $SEED

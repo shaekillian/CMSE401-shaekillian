@@ -1,0 +1,2 @@
+Best fitness: 294
+The best solution comes from either file 3 or 46, both having the highest fitness score of 294. 
